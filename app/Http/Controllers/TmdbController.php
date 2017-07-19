@@ -1,0 +1,61 @@
+<?php
+
+namespace App\Http\Controllers;
+
+use Illuminate\Http\Request;
+use GuzzleHttp\Client;
+use App\Http\Controllers\TmdbController;
+
+class TmdbController extends Controller
+{
+    private static $imageAddress = 'https://image.tmdb.org/t/p/w1000';
+    private static $apiAddress = 'https://api.themoviedb.org/3/';
+    private static $apiKey = '9936b88d2a7832a818b19e3020cc25be';
+
+    static function getBestSeries() {
+
+        $client = new Client();
+        $res = $client->request('GET', self::$apiAddress.'discover/tv?api_key='.self::$apiKey.'&language=pl-PL&sort_by=popularity.desc&air_date.lte=2017-07-18&page=1&timezone=America%2FNew_York&include_null_first_air_dates=false');
+        $bestSeries = json_decode($res->getBody()->getContents());
+
+        return $bestSeries->results;
+    }
+
+    static function getOnAirShows() {
+        $client = new Client();
+        $res = $client->request('GET', self::$apiAddress.'tv/on_the_air?api_key='.self::$apiKey.'&language=pl-PL&page=1');
+        $result = json_decode($res->getBody()->getContents());
+
+        return $result->results;
+
+    }
+
+    static function getShowData($showId) {
+        $client = new Client();
+        $res = $client->request('GET', self::$apiAddress.'tv/'.$showId.'?api_key='.self::$apiKey.'&language=pl-PL');
+        $result = json_decode($res->getBody()->getContents());
+
+        $client = new Client();
+        $res = $client->request('GET', self::$apiAddress.'tv/'.$showId.'/images?api_key='.self::$apiKey);
+        $images = json_decode($res->getBody()->getContents());
+
+        for($i = 0; $i < 15; $i++) {
+            $result->images[$i] = $images->backdrops[$i];
+        }
+
+        return $result;
+    }
+
+    static function getNewTvShows() {
+        $client = new Client();
+        $res = $client->request('GET', self::$apiAddress.'tv/on_the_air?api_key='.self::$apiKey.'&language=pl-PL&page=1');
+        $result = json_decode($res->getBody()->getContents());
+
+        return $result->results;
+    }
+
+    public static function getImageDir() {
+        return self::$imageAddress;
+    }
+
+}
