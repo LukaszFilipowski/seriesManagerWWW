@@ -54,6 +54,14 @@ class TmdbController extends Controller
         return $result->results;
     }
 
+    static function getTopRatedShows() {
+        $client = new Client();
+        $res = $client->request('GET', self::$apiAddress.'tv/top_rated?api_key='.self::$apiKey.'&language=pl-PL&page=1');
+        $result = json_decode($res->getBody()->getContents());
+
+        return $result->results;
+    }
+
     public static function getImageDir() {
         return self::$imageAddress;
     }

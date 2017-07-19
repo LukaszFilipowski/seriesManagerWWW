@@ -104,9 +104,9 @@ input[type="submit"],.agileinfo_chat a,.w3ls_footer_grid1_left p a,.w3l_sign_in_
 	background:#FF8D1B;
 }
 .w3l_sign_in_register{
-	float: right;
+    width: 28%;
+    float: right;
     margin-top:1em;
-    width: 25%;
 }
 .w3l_sign_in_register ul li a{
 	color: #fff;
@@ -128,6 +128,7 @@ input[type="submit"],.agileinfo_chat a,.w3ls_footer_grid1_left p a,.w3l_sign_in_
 	display:inline-block;
 	color:#212121;
 	font-size:1em;
+        width: 49%;
 }
 .w3l_sign_in_register ul li i,.w3l_sign_in_register ul li:first-child{
 	padding-right:1em;
