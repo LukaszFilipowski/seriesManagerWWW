@@ -23,6 +23,10 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('root', ['topRated' => TmdbController::getTopRatedShows(), 'bestSeries' => TmdbController::getBestSeries(), 'imageDir' => TmdbController::getImageDir(), 'onAir' => TmdbController::getOnAirShows()]);
+        return view('root', ['topRated' => TmdbController::getTopRatedShows(),
+            'bestSeries' => TmdbController::getBestSeries(),
+            'imageDir' => TmdbController::getImageDir(),
+            'onAir' => TmdbController::getOnAirShows()
+            ]);
     }
 }

@@ -11,11 +11,17 @@ class TmdbController extends Controller
     private static $imageAddress = 'https://image.tmdb.org/t/p/w1000';
     private static $apiAddress = 'https://api.themoviedb.org/3/';
     private static $apiKey = '9936b88d2a7832a818b19e3020cc25be';
+    private static $lang = 'pl-PL';
 
     static function getBestSeries() {
 
         $client = new Client();
-        $res = $client->request('GET', self::$apiAddress.'discover/tv?api_key='.self::$apiKey.'&language=pl-PL&sort_by=popularity.desc&air_date.lte=2017-07-18&page=1&timezone=America%2FNew_York&include_null_first_air_dates=false');
+
+        $urlString = self::$apiAddress.'discover/tv?api_key='.self::$apiKey.'&language='.self::$lang;
+        $urlString .= '&sort_by=popularity.desc&air_date.lte=2017-07-18&page=1';
+        $urlString .= '&timezone=America%2FNew_York&include_null_first_air_dates=false';
+
+        $res = $client->request('GET', $urlString);
         $bestSeries = json_decode($res->getBody()->getContents());
 
         return $bestSeries->results;
@@ -23,7 +29,7 @@ class TmdbController extends Controller
 
     static function getOnAirShows() {
         $client = new Client();
-        $res = $client->request('GET', self::$apiAddress.'tv/on_the_air?api_key='.self::$apiKey.'&language=pl-PL&page=1');
+        $res = $client->request('GET', self::$apiAddress.'tv/on_the_air?api_key='.self::$apiKey.'&language='.self::$lang.'&page=1');
         $result = json_decode($res->getBody()->getContents());
 
         return $result->results;
@@ -32,7 +38,7 @@ class TmdbController extends Controller
 
     static function getShowData($showId) {
         $client = new Client();
-        $res = $client->request('GET', self::$apiAddress.'tv/'.$showId.'?api_key='.self::$apiKey.'&language=pl-PL');
+        $res = $client->request('GET', self::$apiAddress.'tv/'.$showId.'?api_key='.self::$apiKey.'&language='.self::$lang);
         $result = json_decode($res->getBody()->getContents());
 
         $client = new Client();
@@ -50,7 +56,7 @@ class TmdbController extends Controller
 
     static function getNewTvShows() {
         $client = new Client();
-        $res = $client->request('GET', self::$apiAddress.'tv/on_the_air?api_key='.self::$apiKey.'&language=pl-PL&page=1');
+        $res = $client->request('GET', self::$apiAddress.'tv/on_the_air?api_key='.self::$apiKey.'&language='.self::$lang.'&page=1');
         $result = json_decode($res->getBody()->getContents());
 
         return $result->results;
@@ -58,7 +64,7 @@ class TmdbController extends Controller
 
     static function getTopRatedShows() {
         $client = new Client();
-        $res = $client->request('GET', self::$apiAddress.'tv/top_rated?api_key='.self::$apiKey.'&language=pl-PL&page=1');
+        $res = $client->request('GET', self::$apiAddress.'tv/top_rated?api_key='.self::$apiKey.'&language='.self::$lang.'&page=1');
         $result = json_decode($res->getBody()->getContents());
 
         return $result->results;

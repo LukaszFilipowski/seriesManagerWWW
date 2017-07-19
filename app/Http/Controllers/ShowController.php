@@ -15,7 +15,8 @@ class ShowController extends Controller
 
     private function checkIsMy($showId) {
         if(Auth::check()) {
-            $series = DB::table('user_series')->where('show_id', $showId)->where('user_id', Auth::user()->id)->count();
+            $series = DB::table('user_series')
+                    ->where('show_id', $showId)->where('user_id', Auth::user()->id)->count();
 
             if($series == 0) {
                 return false;
@@ -37,12 +38,16 @@ class ShowController extends Controller
             $mess = $this->buttonAddMessage;
         }
 
-        return view('show/profile', ['showData' => TmdbController::getShowData($showId), 'imageDir' => TmdbController::getImageDir(), 'isMy' => $isMy, 'isMyBtnTxt' => $mess]);
+        return view('show/profile', ['showData' => TmdbController::getShowData($showId),
+            'imageDir' => TmdbController::getImageDir(),
+            'isMy' => $isMy, 'isMyBtnTxt' => $mess
+            ]);
     }
 
     public function checkIsMyAndDelOrAdd($showId) {
         if(Auth::check()) {
-            $series = DB::table('user_series')->where('show_id', $showId)->where('user_id', Auth::user()->id)->count();
+            $series = DB::table('user_series')
+                    ->where('show_id', $showId)->where('user_id', Auth::user()->id)->count();
 
             if($series == 0) {
                 $response = $this->addToMy($showId);
@@ -74,11 +79,14 @@ class ShowController extends Controller
 
     private function delFromMy($showId) {
 
-        if(DB::table('user_series')->where('show_id', $showId)->where('user_id', Auth::user()->id)->delete()) {
+        if(DB::table('user_series')
+                ->where('show_id', $showId)->where('user_id', Auth::user()->id)->delete()) {
+
             return response()->json([
                 'status' => 'deleted',
                 'message' => $this->buttonAddMessage
                 ]);
+            
         } else {
             return response()->json([
                 'status' => 'error'

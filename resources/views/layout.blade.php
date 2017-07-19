@@ -109,11 +109,11 @@
 						<ul class="nav navbar-nav">
 							<li class="active"><a href="{{ route('home') }}">Home</a></li>
 
-							<li><a href="#">cośtam</a></li>
-							<li><a href="#">cośtam2</a></li>
+							<li><a href="#">Kategorie</a></li>
+							<li><a href="#">Lista seriali</a></li>
 
-							<li><a href="#">Sośtam2</a></li>
-							<li><a href="#">ośtam2</a></li>
+							<li><a href="#">Lista użytkowników</a></li>
+							<li><a href="#">Kontakt</a></li>
 						</ul>
 					</nav>
 				</div>
@@ -163,7 +163,7 @@
 			<div class="col-md-5 w3ls_footer_grid1_left">
 				<p>&copy; 2016-2017 SeriesManager Wszelkie prawa zastrzeżone | Design by <a href="http://w3layouts.com/">W3layouts</a></p>
 			</div>
-			<div class="col-md-7 w3ls_footer_grid1_right">
+<!--			<div class="col-md-7 w3ls_footer_grid1_right">
 				<ul>
 					<li>
 						<a href="#">przydatne</a>
@@ -179,7 +179,7 @@
 					</li>
 
 				</ul>
-			</div>
+			</div>-->
 			<div class="clearfix"> </div>
 		</div>
 	</div>
