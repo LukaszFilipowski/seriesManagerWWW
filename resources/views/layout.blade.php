@@ -51,6 +51,7 @@
 <!-- start-smoth-scrolling -->
 <script type="text/javascript" src="{{ asset('js/move-top.js') }}"></script>
 <script type="text/javascript" src="{{ asset('js/easing.js') }}"></script>
+<script type="text/javascript" src="{{ asset('js/series-ajax.js') }}"></script>
 <script type="text/javascript">
 	jQuery(document).ready(function($) {
 		$(".scroll").click(function(event){
@@ -67,7 +68,7 @@
 	<div class="header">
 		<div class="container">
 			<div class="w3layouts_logo">
-				<a href="#"><h1>series<span>Manager</span></h1></a>
+				<a href="{{ route('home') }}"><h1>series<span>Manager</span></h1></a>
 			</div>
 			<div class="w3_search">
 				<form action="#" method="post">
@@ -106,7 +107,7 @@
 				<div class="collapse navbar-collapse navbar-right" id="bs-example-navbar-collapse-1">
 					<nav>
 						<ul class="nav navbar-nav">
-							<li class="active"><a href="#">Home</a></li>
+							<li class="active"><a href="{{ route('home') }}">Home</a></li>
 
 							<li><a href="#">cośtam</a></li>
 							<li><a href="#">cośtam2</a></li>

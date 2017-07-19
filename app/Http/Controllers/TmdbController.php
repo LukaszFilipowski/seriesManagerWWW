@@ -40,7 +40,9 @@ class TmdbController extends Controller
         $images = json_decode($res->getBody()->getContents());
 
         for($i = 0; $i < 15; $i++) {
-            $result->images[$i] = $images->backdrops[$i];
+            if(isset($images->backdrops[$i])) {
+                $result->images[$i] = $images->backdrops[$i];
+            }
         }
 
         return $result;

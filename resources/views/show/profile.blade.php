@@ -7,7 +7,7 @@
 		<!-- /w3l-medile-movies-grids -->
 			<div class="agileits-single-top">
 				<ol class="breadcrumb">
-				  <li><a href="/">Home</a></li>
+				  <li><a href="{{ route('home') }}">Home</a></li>
 				  <li class="active">{{ $showData->name }}</li>
 				</ol>
 			</div>
@@ -17,11 +17,16 @@
 				<div class="col-sm-8 single-left">
 					<div class="song">
 						<div class="song-info">
-							<h3>{{ $showData->name }}</h3>
+                                                    <h3>{{ $showData->name }}</h3>
+
 					</div>
-						<div class="video-grid-single-page-agileits">
-							<div data-video="dLmKio67pVQ" id="video"> <img src="{{ $imageDir.$showData->backdrop_path }}" alt="" class="img-responsive" /> </div>
-						</div>
+                                            @if(Auth::check())
+                                                <button type="button" data-showid="{{$showData->id}}" class="addOrDelToMySeries btn btn-{{$isMy}}">{{ $isMyBtnTxt }}</button>
+                                            @endif
+                                            <div class="video-grid-single-page-agileits">
+                                                <div data-video="dLmKio67pVQ" id="video"> <img src="{{ $imageDir.$showData->backdrop_path }}" alt="" class="img-responsive" /> </div>
+                                            </div>
+
 					</div>
 
                                     <p>{{ $showData->overview }}</p>
@@ -35,10 +40,10 @@
 					<h3>Odcinki</h3>
 					<div class="single-grid-right">
 						@foreach($showData->seasons as $seasion)
-                                                <b>Sezon {{ ++$seasion->season_number }}</b><br/>
+
+                                                    <b>Sezon {{ $seasion->season_number }}</b><br/>
                                                     Data premiery: {{ $seasion->air_date }}<br/>
                                                     Liczba odcinków: {{ $seasion->episode_count }}<br/>
-
 
                                                 @endforeach
 					</div>

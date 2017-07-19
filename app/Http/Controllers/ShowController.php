@@ -9,9 +9,35 @@ use App\User_Series;
 
 class ShowController extends Controller
 {
-    public function profile($showId) {
 
-        return view('show/profile', ['showData' => TmdbController::getShowData($showId), 'imageDir' => TmdbController::getImageDir()]);
+    private $buttonAddMessage = 'Dodaj do moich seriali';
+    private $buttonDelMessage = 'Usuń z moich seriali';
+
+    private function checkIsMy($showId) {
+        if(Auth::check()) {
+            $series = DB::table('user_series')->where('show_id', $showId)->where('user_id', Auth::user()->id)->count();
+
+            if($series == 0) {
+                return false;
+            } else {
+                return true;
+            }
+
+        } else {
+            return false;
+        }
+    }
+
+    public function profile($showId) {
+        if($this->checkIsMy($showId)) {
+            $isMy = 'danger';
+            $mess = $this->buttonDelMessage;
+        } else {
+            $isMy = 'success';
+            $mess = $this->buttonAddMessage;
+        }
+
+        return view('show/profile', ['showData' => TmdbController::getShowData($showId), 'imageDir' => TmdbController::getImageDir(), 'isMy' => $isMy, 'isMyBtnTxt' => $mess]);
     }
 
     public function checkIsMyAndDelOrAdd($showId) {
@@ -35,7 +61,8 @@ class ShowController extends Controller
         $user_series->user_id = Auth::user()->id;
         if($user_series->save()) {
             return response()->json([
-                'status' => 'added'
+                'status' => 'added',
+                'message' => $this->buttonDelMessage
                 ]);
         } else {
             return response()->json([
@@ -49,7 +76,8 @@ class ShowController extends Controller
 
         if(DB::table('user_series')->where('show_id', $showId)->where('user_id', Auth::user()->id)->delete()) {
             return response()->json([
-                'status' => 'deleted'
+                'status' => 'deleted',
+                'message' => $this->buttonAddMessage
                 ]);
         } else {
             return response()->json([
