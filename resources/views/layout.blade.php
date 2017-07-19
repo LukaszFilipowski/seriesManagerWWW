@@ -81,7 +81,7 @@
 					<li><a href="{{ route('register') }}" data-toggle="modal">Rejestracja</a></li>
 					<li><a href="{{ route('login') }}" data-toggle="modal">Logowanie</a></li>
                                     @else
-                                    <li>Zalogowany jako {{ Auth::user()->email }} <a href="{{ Auth::logout() }}">Wyloguj</a></li>
+                                    <li>Zalogowany jako {{ Auth::user()->email }} <a href="#">Wyloguj</a></li>
                                     @endif
 				</ul>
 			</div>

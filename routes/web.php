@@ -18,5 +18,6 @@ Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 
 Route::get('/show/{showId}', 'ShowController@profile')->name('profile');
+Route::get('/show/addOrDel/{showId}', 'ShowController@checkIsMyAndDelOrAdd');
 
 
