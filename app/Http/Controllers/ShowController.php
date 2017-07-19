@@ -10,4 +10,9 @@ class ShowController extends Controller
 
         return view('show/profile', ['showData' => TmdbController::getShowData($showId), 'imageDir' => TmdbController::getImageDir()]);
     }
+
+    public function addToMyShows($showId) {
+
+        
+    }
 }
