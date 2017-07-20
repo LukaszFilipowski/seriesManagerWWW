@@ -79,10 +79,11 @@
 			<div class="w3l_sign_in_register">
 				<ul>
                                     @if(!Auth::user())
-					<li><a href="{{ route('register') }}" data-toggle="modal">Rejestracja</a></li>
-					<li><a href="{{ route('login') }}" data-toggle="modal">Logowanie</a></li>
+					<li><a href="{{ route('register') }}">Rejestracja</a></li>
+					<li><a href="{{ route('login') }}">Logowanie</a></li>
                                     @else
-                                    <li>Zalogowany jako {{ Auth::user()->email }} <a href="#">Wyloguj</a></li>
+                                    <li><a href="#">Profil</a></li>
+                                    <li><a href="#">Wyloguj</a></li>
                                     @endif
 				</ul>
 			</div>
@@ -114,6 +115,10 @@
 
 							<li><a href="#">Lista użytkowników</a></li>
 							<li><a href="#">Kontakt</a></li>
+                                                        @if(Auth::check())
+                                                            <li><a href="#">Ustawienia</a></li>
+                                                            <li><a href="#">Kalendarz</a></li>
+                                                        @endif
 						</ul>
 					</nav>
 				</div>
