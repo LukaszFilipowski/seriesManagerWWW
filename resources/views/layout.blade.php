@@ -115,7 +115,7 @@
 
 							<li><a href="#">Lista użytkowników</a></li>
 							<li><a href="#">Kontakt</a></li>
-                                                        @if(Auth::check())
+                                                        @if(Auth::check()) 
                                                             <li><a href="#">Ustawienia</a></li>
                                                             <li><a href="#">Kalendarz</a></li>
                                                         @endif
