@@ -82,7 +82,7 @@
 					<li><a href="{{ route('register') }}">Rejestracja</a></li>
 					<li><a href="{{ route('login') }}">Logowanie</a></li>
                                     @else
-                                    <li><a href="#">Profil</a></li>
+                                    <li><a href="{{ url('/profile/'.Auth::user()->id) }}">Profil</a></li>
                                     <li><a href="#">Wyloguj</a></li>
                                     @endif
 				</ul>
@@ -115,7 +115,7 @@
 
 							<li><a href="#">Lista użytkowników</a></li>
 							<li><a href="#">Kontakt</a></li>
-                                                        @if(Auth::check()) 
+                                                        @if(Auth::check())
                                                             <li><a href="#">Ustawienia</a></li>
                                                             <li><a href="#">Kalendarz</a></li>
                                                         @endif

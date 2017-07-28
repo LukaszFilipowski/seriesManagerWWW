@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use GuzzleHttp\Client;
 use App\Http\Controllers\TmdbController;
+use Illuminate\Support\Facades\DB;
 
 class TmdbController extends Controller
 {
@@ -25,6 +26,25 @@ class TmdbController extends Controller
         $bestSeries = json_decode($res->getBody()->getContents());
 
         return $bestSeries->results;
+    }
+
+    static function getShowDetails($showId) {
+        $client = new Client();
+        $res = $client->request('GET', self::$apiAddress.'tv/'.$showId.'?api_key='.self::$apiKey.'&language='.self::$lang);
+        $result = json_decode($res->getBody()->getContents());
+
+        return $result;
+    }
+
+    static function getUserSeries($userId) {
+        $series = DB::table('user_series')->where('user_id', $userId)->get();
+
+        $seriesData = array();
+        foreach($series as $show) {
+            $seriesData[] = self::getShowDetails($show->show_id);
+        }
+
+        return $seriesData;
     }
 
     static function getOnAirShows() {

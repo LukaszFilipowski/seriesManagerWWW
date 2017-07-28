@@ -24,4 +24,6 @@ Route::get('/show/{showId}', [
 
 Route::get('/json/addOrDel/{showId}', 'ShowController@checkIsMyAndDelOrAdd');
 
+Route::get('/profile/{userId}', 'UserController@profile');
+
 
